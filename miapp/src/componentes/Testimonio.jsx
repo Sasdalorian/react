@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/Testimonio.css";
+import { Personas } from '../personas';
 
 function Testimonio(props) {
   return (
@@ -18,4 +19,15 @@ function Testimonio(props) {
   );
 };
 
-export default Testimonio;
+export function generarTestimonios() {
+  return Personas.map((persona) => (
+    <Testimonio
+      nombre={persona.nombre}
+      pais={persona.pais}
+      img={persona.img}
+      cargo={persona.cargo}
+      empresa={persona.empresa}
+      texto={persona.texto}
+    />
+  ));
+}
