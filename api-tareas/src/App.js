@@ -1,6 +1,8 @@
 import './App.css';
+
+// COMPONENTES
 import { Logo } from './components/Logo';
-import { Tarea } from './components/Tarea';
+import { ListaDeTareas } from './components/ListaDeTareas';
 
 function App() {
   return (
@@ -9,7 +11,7 @@ function App() {
 
       <div className='tareas_lista_componentes'>
         <h1>Mis Tareas</h1>
-        <Tarea texto="Aprender React" />
+        <ListaDeTareas />
       </div>
 
     </div>
