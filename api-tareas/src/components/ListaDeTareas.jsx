@@ -12,8 +12,22 @@ export function ListaDeTareas() {
       tarea.texto = tarea.texto.trim();
       const tareasActualizadas = [tarea, ...tareas];
       setTareas(tareasActualizadas);
-    }
-  }
+    };
+  };
+
+  const eliminarTarea = id => {
+    const tareasActualizadas = tareas.filter(tarea => tarea.id !== id);
+    setTareas(tareasActualizadas);
+  };
+  const completarTarea = id => {
+    const tareasActualizadas = tareas.map(tarea => {
+      if(tarea.id === id) {
+        tarea.completada = !tarea.completada;
+      };
+      return tarea;
+    });
+    setTareas(tareasActualizadas);
+  };
 
   return (
     <>
@@ -26,6 +40,8 @@ export function ListaDeTareas() {
             id={tarea.id}
             texto={tarea.texto}
             completada={tarea.completada}
+            completarTarea={completarTarea}
+            eliminarTarea={eliminarTarea}
           />) 
         }
       </div>
