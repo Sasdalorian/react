@@ -1,25 +1,35 @@
 import { useState } from "react";
 
-const TURNS = {
+const TURNS = { // Turnos
   X: "X",
   O: "O"
 };
 
-const Square = ({ children, isSelected, updateBoard, index }) => {
-  
+const Square = ({ children, selected, updateBoard, index }) => {
   const className = `square`
+  const handleClick = () => {
+    updateBoard(index);
+  }
+
   return (
-    <div className={className}>
+    <div onClick={handleClick} className={className}>
       {children}
     </div>
   )
 };
 
 function App() {
-
   const [board, setBoard] = useState(Array(9).fill(null));
-
   const [turn, setTurn] = useState(TURNS.X);
+
+  const updateBoard = (index) => {
+    const newBoard = [... board];
+    newBoard[index] = turn  // X u O
+    setBoard(newBoard);
+    
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn);
+  }
   
 
   return (
@@ -29,7 +39,8 @@ function App() {
         {
           board.map(( _, index) => {
             return (
-              <Square key={index} index={index}>
+              <Square key={index} index={index} updateBoard={updateBoard}>
+                {board[index]}
               </Square>
             )
           })
@@ -37,10 +48,10 @@ function App() {
       </section>
 
       <section className="turn">
-        <div className={turn === TURNS.X ? "selected" : ""}>
+        <div className={turn === TURNS.X ? "square selected" : "square"}>
             {TURNS.X}
         </div>
-        <div className={turn === TURNS.O ? "selected" : ""}>
+        <div className={turn === TURNS.O ? "square selected" : "square"}>
             {TURNS.O}
         </div>
       </section>
